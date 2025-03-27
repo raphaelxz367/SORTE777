@@ -4,6 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHzera</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .popup {
+            position: absolute;
+            background: rgb(244, 255, 149);
+            border: 2px solid black;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup img {
+            width: 100%;
+            height: auto;
+        }
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #ffcc00;
+            padding: 20px;
+            text-align: center;
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .sidebar img {
+            width: 100%;
+            height: auto;
+        }
+        .button-blink {
+            display: inline-block;
+            padding: 10px;
+            margin-top: 10px;
+            background: red;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            animation: blink 1s infinite alternate;
+        }
+        @keyframes blink {
+            0% { background: red; color: white; }
+            50% { background: blue; color: yellow; }
+            100% { background: green; color: pink; }
+        }
+    </style>
 </head>
 <body>
     <br>
@@ -27,5 +89,43 @@
         <h1>PARA PARTICIPAR, PRIMEIRO ENVIAR 5 REAIS PARA PIX:</h1>
         <img src="pix.jpg" width="300">PIX </img>
     </form>
+
+    <div class="sidebar">
+        <h3>Uma rata solteira a 5 km de você</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/pt/e/e0/Esmagares_a_minha_rata.png" alt="Rata">
+        <a href="https://www.youtube.com/watch?v=PoCeslYxjDE?autoplay=1" class="button-blink">ESMAGAR RATA</a>
+    </div>
+
+    <script>
+        let size = 200;
+
+        function showPopup() {
+            let popup = document.createElement("div");
+            popup.classList.add("popup");
+            popup.style.width = size + "px";
+            popup.style.height = size + "px";
+            popup.style.top = Math.random() * (window.innerHeight - size) + "px";
+            popup.style.left = Math.random() * (window.innerWidth - size) + "px";
+
+            popup.innerHTML = `
+                <h2>Ganhe crédito vitalício para sacar durante 3 horas!</h2>
+                <img src="https://i.makeagif.com/media/11-12-2023/RQcOWN.gif" alt="Promoção" style="width: ${size * 0.8}px;">
+                <br>
+                <button class="close-btn" onclick="closePopup(this)">Fechar</button>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        function closePopup(button) {
+            let popup = button.parentElement;
+            popup.remove();
+            size += 50;
+            showPopup();
+        }
+
+        window.onload = function() {
+            showPopup();
+        };
+    </script>
 </body>
 </html>
